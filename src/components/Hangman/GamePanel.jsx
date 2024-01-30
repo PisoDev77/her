@@ -6,7 +6,8 @@ const makeLetters = (answerWord) => answerWord.split('').map((alphabet) => ({ al
 
 export default function GamePanel() {
 	const { answerWord, cnt, setCnt } = useContext(HangManContext);
-	const [letterBoxes, setLetterBoxes] = useState(makeLetters(answerWord));
+
+	const letterBoxes = answerWord.split('').map((alphabet) => ({ alphabet, guessed: false }));
 
 	const guessAlphabet = (event) => {
 		if (event.key !== 'Enter') return;
@@ -24,7 +25,6 @@ export default function GamePanel() {
 		answerAlphabetidxs.forEach((idx) => {
 			letterBoxes[idx] = { ...letterBoxes[idx], guessed: true };
 		});
-		setLetterBoxes([...letterBoxes]);
 		event.target.value = '';
 
 		if (answerAlphabetidxs.length === 0) setCnt(cnt - 1);
@@ -61,7 +61,7 @@ function GuessAlphabet(onKeyDown) {
 	return (
 		<TextField
 			variant='filled'
-			autoFocus='true'
+			autoFocus={true}
 			autoComplete='off'
 			inputProps={{ onKeyDown, maxLength: 1, style: { textAlign: 'center', width: '1em' } }}
 		></TextField>
