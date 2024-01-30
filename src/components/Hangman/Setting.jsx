@@ -20,7 +20,6 @@ export default function Setting() {
 
 	const handleTextField = (event) => {
 		if (event.key !== 'Enter') return;
-		console.log(event.key);
 		setAnswerWord(event.target.value);
 	};
 
@@ -31,6 +30,7 @@ export default function Setting() {
 			<TextField
 				variant='outlined'
 				autoComplete='off'
+				label={answerWord}
 				inputProps={{ onKeyDown: handleTextField, style: { textAlign: 'center' } }}
 			/>
 			<ButtonGroup size='large' variant='outlined' onClick={handleBtns}>
