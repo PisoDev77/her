@@ -1,6 +1,7 @@
 import { Box, Stack, Tab, Tabs, Typography } from '@mui/material';
 import ColorMode from './ColorMode';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Page({ title, tabs }) {
 	const [tab, setTab] = useState(0);
@@ -11,7 +12,7 @@ export default function Page({ title, tabs }) {
 
 	return (
 		<>
-			<Typography variant='h2' component='h1'>
+			<Typography variant='h2' component={Link} to={'/'} sx={{ textDecoration: 'none', color: 'inherit' }}>
 				{title}
 			</Typography>
 			<Stack
