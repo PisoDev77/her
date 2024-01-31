@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Hangman from './pages/Hangman';
 import Home from './pages/Home';
+import Calendar from './pages/Calendar';
+
 import { CssBaseline, ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { ColorModeContext } from './contexts';
@@ -33,6 +35,7 @@ function App() {
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/hangman' element={<Hangman />} />
+						<Route path='/calendar' element={<Calendar />} />
 					</Routes>
 				</ThemeProvider>
 			</ColorModeContext.Provider>

@@ -18,6 +18,19 @@ export default function Home() {
 						secondary='This is hang man game description.'
 					/>
 				</ListItemButton>
+				<ListItemButton component={Link} to={'/calendar'}>
+					<ListItemAvatar>
+						<Avatar>H</Avatar>
+					</ListItemAvatar>
+					<ListItemText
+						primary={
+							<Typography variant='h3' component={'h2'}>
+								How to read Date?
+							</Typography>
+						}
+						secondary={`Let's Practice reading a date.`}
+					/>
+				</ListItemButton>
 			</List>
 		</Stack>
 	);
