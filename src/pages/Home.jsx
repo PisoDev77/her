@@ -5,7 +5,7 @@ export default function Home() {
 		<main>
 			<ul>
 				<li>
-					<Link to={'/hang-man'}>Hang Man</Link>
+					<Link to={'/hangman'}>Hang Man</Link>
 				</li>
 			</ul>
 		</main>
