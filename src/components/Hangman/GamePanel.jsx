@@ -41,12 +41,17 @@ export default function GamePanel() {
 	};
 
 	return (
-		<Stack spacing={{ xs: 0, sm: 1 }} direction='column' alignItems={'center'}>
-			<h1>Panel</h1>
-			<Stack spacing={{ xs: 0, sm: 1 }} direction='row' justifyContent={'center'}>
+		<Stack
+			spacing={{ xs: 0, sm: 1 }}
+			direction='column'
+			alignItems={'center'}
+			justifyContent={'center'}
+			minHeight={'400px'}
+		>
+			<Stack spacing={{ xs: 0, sm: 0 }} direction='row' justifyContent={'flex-start'} flexWrap={'wrap'}>
 				{idxs.map((idx, _) =>
 					//prettier-ignore
-					<Card key={_} sx={{ marginY: '1rem', paddingX: '1rem', paddingTop: '1rem', fontSize: '3rem' }}>
+					<Card key={_} sx={{ paddingX: '1rem', paddingTop: '1rem', fontSize: '3rem' }}>
 						{idx === -2 ? (	<> &nbsp;&nbsp; </> ) 
                                     : (	<> {idx === -1 
                                             ? <> &nbsp;&nbsp; </> 
@@ -58,7 +63,7 @@ export default function GamePanel() {
 				)}
 			</Stack>
 			<TextField
-				variant='filled'
+				variant='outlined'
 				autoFocus={true}
 				autoComplete='off'
 				defaultValue={guessedAlphabet}
