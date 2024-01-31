@@ -33,6 +33,7 @@ function App() {
 				<ThemeProvider theme={theme}>
 					<CssBaseline />
 					<Routes>
+						<Route path='/her' element={<Home />} />
 						<Route path='/' element={<Home />} />
 						<Route path='/hangman' element={<Hangman />} />
 						<Route path='/calendar' element={<Calendar />} />
