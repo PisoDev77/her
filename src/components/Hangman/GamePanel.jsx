@@ -51,7 +51,7 @@ export default function GamePanel() {
 			<Stack spacing={{ xs: 0, sm: 0 }} direction='row' justifyContent={'flex-start'} flexWrap={'wrap'}>
 				{idxs.map((idx, _) =>
 					//prettier-ignore
-					<Card key={_} sx={{ paddingX: '1rem', paddingTop: '1rem', fontSize: '3rem' }}>
+					<Card key={_} sx={{ paddingX: '1rem', paddingTop: '1rem', fontSize: '4rem' }}>
 						{idx === -2 ? (	<> &nbsp;&nbsp; </> ) 
                                     : (	<> {idx === -1 
                                             ? <> &nbsp;&nbsp; </> 
@@ -71,7 +71,7 @@ export default function GamePanel() {
 					maxLength: 1,
 					onKeyDown: handleGuess,
 					onChange: handleChange,
-					style: { textAlign: 'center', width: '1em' },
+					style: { textAlign: 'center', width: '1em', fontSize: '2rem' },
 				}}
 			/>
 		</Stack>

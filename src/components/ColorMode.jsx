@@ -15,8 +15,6 @@ export default function ColorMode() {
 				justifyContent: 'center',
 				bgcolor: 'background.default',
 				color: 'text.primary',
-				borderRadius: 1,
-				p: 3,
 			}}
 		>
 			{theme.palette.mode} mode
