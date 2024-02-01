@@ -13,8 +13,12 @@ export default function Lecture() {
 
 	return (
 		lectures &&
-		lectures.map((lecture, idx) => (
-			<Chip variant='filled' label={lecture} onDelete={idx !== 0 ? () => handleDelete(idx) : ''} />
-		))
+		lectures.map((lecture, idx) =>
+			idx !== 0 ? (
+				<Chip variant='filled' label={lecture} onDelete={() => handleDelete(idx)} />
+			) : (
+				<Chip variant='filled' label={lecture} />
+			)
+		)
 	);
 }
