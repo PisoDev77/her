@@ -2,6 +2,7 @@ import { Stack, TextField } from '@mui/material';
 import { useContext } from 'react';
 import { ScheduleContext } from '../../contexts';
 import { DefaultLecture, DeleteLecture } from './Lecture';
+import { getContrastColor, getRandomColor } from '../lib/random';
 
 export default function SetLecture() {
 	const { lectures, setLectures } = useContext(ScheduleContext);
@@ -13,7 +14,10 @@ export default function SetLecture() {
 
 		if (lecture.trim() === '' || lectures.find(({ lecture: _ }) => _ === lecture)) return;
 
-		setLectures([...lectures, { lecture }]);
+		const backgroundColor = getRandomColor(lectures);
+		const color = getContrastColor(backgroundColor);
+
+		setLectures([...lectures, { lecture, color, backgroundColor }]);
 		e.target.value = '';
 	};
 
@@ -23,8 +27,17 @@ export default function SetLecture() {
 			<TextField onKeyDown={handleAddLecture} inputProps={{ style: { textAlign: 'center' } }} />
 			<Stack spacing={{ xs: 0, sm: 1 }} direction='row'>
 				{lectures &&
-					lectures.map(({ lecture }, idx) =>
-						idx !== 0 ? <DeleteLecture lecture={lecture} idx={idx} /> : <DefaultLecture lecture={lecture} />
+					lectures.map(({ lecture, color, backgroundColor }, idx) =>
+						idx !== 0 ? (
+							<DeleteLecture
+								lecture={lecture}
+								idx={idx}
+								color={color}
+								backgroundColor={backgroundColor}
+							/>
+						) : (
+							<DefaultLecture lecture={lecture} color={color} backgroundColor={backgroundColor} />
+						)
 					)}
 			</Stack>
 		</Stack>
