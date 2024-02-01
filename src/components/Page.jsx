@@ -12,7 +12,7 @@ export default function Page({ title, tabs }) {
 
 	return (
 		<>
-			<Typography variant='h2' component={Link} to={'/'} sx={{ textDecoration: 'none', color: 'inherit' }}>
+			<Typography variant='h2' component={Link} to={'/her'} sx={{ textDecoration: 'none', color: 'inherit' }}>
 				{title}
 			</Typography>
 			<Stack
