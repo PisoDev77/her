@@ -1,21 +1,13 @@
-import { useContext, useState } from 'react';
-import { MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
+import { useContext } from 'react';
+import { Button, TableContainer, TextField } from '@mui/material';
 import { ScheduleContext } from '../../contexts';
-import { DefaultLecture } from './Lecture';
-
-const days = ['월', '화', '수', '목', '금'];
+import TimeTable from './TimeTable';
 
 export default function SetWeek() {
-	const { lectures } = useContext(ScheduleContext);
-	const [times, setTimes] = useState(['1교시', '2교시', '3교시', '4교시', '점심', '5교시', '6교시']);
+	const { setLunch } = useContext(ScheduleContext);
 
 	const handleLunch = (event) => {
-		console.log(event.target.value);
-		setTimes(
-			+event.target.value === 4
-				? ['1교시', '2교시', '3교시', '4교시', '점심', '5교시', '6교시']
-				: ['1교시', '2교시', '3교시', '4교시', '5교시', '점심', '6교시']
-		);
+		setLunch(+event.target.value);
 	};
 
 	return (
@@ -29,47 +21,8 @@ export default function SetWeek() {
 					5교시 후
 				</option>
 			</TextField>
-			<Table>
-				<TableHead>
-					<TableRow>
-						<TableCell>비고</TableCell>
-						{days.map((day) => (
-							<TableCell key={'table-head-' + day}>{day}</TableCell>
-						))}
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{times.map((time, timeIdx) => (
-						<TableRow key={'ss' + timeIdx}>
-							<TableCell>{time}</TableCell>
-							{days.map((day, idx) => (
-								<TableCell key={'timeAndday-' + idx}>
-									{time !== '점심' ? (
-										<TextField
-											select
-											name={`${day}-${time}`}
-											label={`${day}-${time}`}
-											defaultValue={0}
-										>
-											{lectures.map(({ lecture, color, backgroundColor }, idx) => (
-												<MenuItem key={lecture} value={idx}>
-													<DefaultLecture
-														lecture={lecture}
-														color={color}
-														backgroundColor={backgroundColor}
-													/>
-												</MenuItem>
-											))}
-										</TextField>
-									) : (
-										''
-									)}
-								</TableCell>
-							))}
-						</TableRow>
-					))}
-				</TableBody>
-			</Table>
+			<Button type='submit'>저장</Button>
+			<TimeTable edit={true} />
 		</TableContainer>
 	);
 }
