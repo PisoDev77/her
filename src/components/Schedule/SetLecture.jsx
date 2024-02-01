@@ -1,8 +1,8 @@
-import { Button, FormControl, IconButton, Stack, TextField } from '@mui/material';
+import { IconButton, Stack, TextField } from '@mui/material';
 import { useContext, useState } from 'react';
 import { ScheduleContext } from '../../contexts';
 import { DefaultLecture, DeleteLecture } from './Lecture';
-import { getContrastColor, getRandomColor } from '../lib/random';
+import { getContrastColor, getRandomColor } from '../../lib/random';
 import { Add } from '@mui/icons-material';
 
 export default function SetLecture() {
