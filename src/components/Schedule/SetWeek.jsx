@@ -10,8 +10,9 @@ export default function SetWeek() {
 	const [times, setTimes] = useState(['1교시', '2교시', '3교시', '4교시', '점심', '5교시', '6교시']);
 
 	const handleLunch = (event) => {
+		console.log(event.target.value);
 		setTimes(
-			event.target.value === 4
+			+event.target.value === 4
 				? ['1교시', '2교시', '3교시', '4교시', '점심', '5교시', '6교시']
 				: ['1교시', '2교시', '3교시', '4교시', '5교시', '점심', '6교시']
 		);
