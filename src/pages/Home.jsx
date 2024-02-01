@@ -26,8 +26,8 @@ export default function Home() {
 	return (
 		<Stack spacing={{ xs: 0, sm: 1 }} direction='column' alignItems={'center'}>
 			<List>
-				{pages.map(({ avatar, to, primary, secondary }) => (
-					<ListItemButton component={Link} to={to}>
+				{pages.map(({ avatar, to, primary, secondary }, idx) => (
+					<ListItemButton key={'pages-' + idx} component={Link} to={to}>
 						<ListItemAvatar>
 							<Avatar>{avatar}</Avatar>
 						</ListItemAvatar>
