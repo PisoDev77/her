@@ -31,17 +31,19 @@ export default function SetWeek() {
 			</TextField>
 			<Table>
 				<TableHead>
-					<TableCell>비고</TableCell>
-					{days.map((day) => (
-						<TableCell>{day}</TableCell>
-					))}
+					<TableRow>
+						<TableCell>비고</TableCell>
+						{days.map((day) => (
+							<TableCell key={'table-head-' + day}>{day}</TableCell>
+						))}
+					</TableRow>
 				</TableHead>
 				<TableBody>
-					{times.map((time) => (
-						<TableRow>
+					{times.map((time, timeIdx) => (
+						<TableRow key={'ss' + timeIdx}>
 							<TableCell>{time}</TableCell>
-							{days.map((day) => (
-								<TableCell>
+							{days.map((day, idx) => (
+								<TableCell key={'timeAndday-' + idx}>
 									{time !== '점심' ? (
 										<TextField
 											select
