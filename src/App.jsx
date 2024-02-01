@@ -6,6 +6,7 @@ import Calendar from './pages/Calendar';
 import { CssBaseline, ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { ColorModeContext } from './contexts';
+import Schedule from './pages/Schedule';
 
 function App() {
 	const [mode, setMode] = useState(useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light');
@@ -34,9 +35,9 @@ function App() {
 					<CssBaseline />
 					<Routes>
 						<Route path='/her' element={<Home />} />
-						<Route path='/' element={<Home />} />
 						<Route path='/hangman' element={<Hangman />} />
 						<Route path='/calendar' element={<Calendar />} />
+						<Route path='/schedule' element={<Schedule />} />
 					</Routes>
 				</ThemeProvider>
 			</ColorModeContext.Provider>

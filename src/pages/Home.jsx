@@ -1,36 +1,46 @@
 import { List, ListItemButton, ListItemAvatar, Avatar, ListItemText, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+const pages = [
+	{
+		avatar: 'H',
+		to: '/hangman',
+		primary: 'Hang Man',
+		secondary: 'This is hang man game description.',
+	},
+	{
+		avatar: 'H',
+		to: '/calendar',
+		primary: 'How to read Date?',
+		secondary: `Let's Practice reading a date.`,
+	},
+	{
+		avatar: 'S',
+		to: '/schedule',
+		primary: 'Template Schedule',
+		secondary: `교무수첩??`,
+	},
+];
+
 export default function Home() {
 	return (
 		<Stack spacing={{ xs: 0, sm: 1 }} direction='column' alignItems={'center'}>
 			<List>
-				<ListItemButton component={Link} to={'/hangman'}>
-					<ListItemAvatar>
-						<Avatar>H</Avatar>
-					</ListItemAvatar>
-					<ListItemText
-						primary={
-							<Typography variant='h3' component={'h2'}>
-								Hang Man
-							</Typography>
-						}
-						secondary='This is hang man game description.'
-					/>
-				</ListItemButton>
-				<ListItemButton component={Link} to={'/calendar'}>
-					<ListItemAvatar>
-						<Avatar>H</Avatar>
-					</ListItemAvatar>
-					<ListItemText
-						primary={
-							<Typography variant='h3' component={'h2'}>
-								How to read Date?
-							</Typography>
-						}
-						secondary={`Let's Practice reading a date.`}
-					/>
-				</ListItemButton>
+				{pages.map(({ avatar, to, primary, secondary }) => (
+					<ListItemButton component={Link} to={to}>
+						<ListItemAvatar>
+							<Avatar>{avatar}</Avatar>
+						</ListItemAvatar>
+						<ListItemText
+							primary={
+								<Typography variant='h3' component={'h2'}>
+									{primary}
+								</Typography>
+							}
+							secondary={secondary}
+						/>
+					</ListItemButton>
+				))}
 			</List>
 		</Stack>
 	);
