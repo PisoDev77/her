@@ -9,8 +9,8 @@ export default function SetLecture() {
 	const { lectures, setLectures } = useContext(ScheduleContext);
 
 	const handleAddLecture = (e) => {
+		alert(e.key);
 		if (e.key !== 'Enter') return;
-
 		const inputLecture = e.target.value;
 
 		if (inputLecture.trim() === '' || lectures.find(({ lecture }) => lecture === inputLecture)) return;
