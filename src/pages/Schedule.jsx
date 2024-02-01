@@ -6,7 +6,7 @@ import SetWeek from '../components/Schedule/SetWeek';
 import { ScheduleContext } from '../contexts';
 
 export default function Schedule() {
-	const [lectures, setLectures] = useState(['없음']);
+	const [lectures, setLectures] = useState([{ lecture: '없음' }]);
 
 	return (
 		<ScheduleContext.Provider value={{ lectures, setLectures }}>
