@@ -1,24 +1,22 @@
 import { Chip } from '@mui/material';
-import { ScheduleContext } from '../../contexts';
 import { useContext } from 'react';
+import { ScheduleContext } from '../../contexts';
 
-export default function Lecture() {
+export function DeleteLecture({ lecture, idx }) {
 	const { lectures, setLectures } = useContext(ScheduleContext);
-
-	const handleDelete = (idx) => {
-		const tmpArr = [...lectures];
-		tmpArr.splice(idx, 1);
-		setLectures(tmpArr);
-	};
-
 	return (
-		lectures &&
-		lectures.map((lecture, idx) =>
-			idx !== 0 ? (
-				<Chip variant='filled' label={lecture} onDelete={() => handleDelete(idx)} />
-			) : (
-				<Chip variant='filled' label={lecture} />
-			)
-		)
+		<Chip
+			variant='filled'
+			label={lecture}
+			onDelete={() => {
+				const tmpArr = [...lectures];
+				tmpArr.splice(idx, 1);
+				setLectures(tmpArr);
+			}}
+		/>
 	);
+}
+
+export function DefaultLecture({ lecture }) {
+	return <Chip variant='filled' label={lecture} />;
 }
