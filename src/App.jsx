@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom';
 import Hangman from './pages/Hangman';
 import Home from './pages/Home';
 import Calendar from './pages/Calendar';
@@ -29,19 +29,20 @@ function App() {
 	);
 
 	return (
-		<BrowserRouter>
+		<HashRouter basename='/'>
 			<ColorModeContext.Provider value={colorMode}>
 				<ThemeProvider theme={theme}>
 					<CssBaseline />
 					<Routes>
 						<Route path='/her' element={<Home />} />
+						<Route path='/' element={<Home />} />
 						<Route path='/hangman' element={<Hangman />} />
 						<Route path='/calendar' element={<Calendar />} />
 						<Route path='/schedule' element={<Schedule />} />
 					</Routes>
 				</ThemeProvider>
 			</ColorModeContext.Provider>
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
 
