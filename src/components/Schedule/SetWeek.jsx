@@ -1,18 +1,23 @@
 import { useContext } from 'react';
-import { Button, TableContainer, TextField } from '@mui/material';
+
+import { Button, ButtonGroup, Stack, TextField, Typography } from '@mui/material';
+
 import { ScheduleContext } from '../../contexts';
+
 import TimeTable from './TimeTable';
 
 export default function SetWeek() {
-	const { setLunch } = useContext(ScheduleContext);
+	const { setLunch, setStep } = useContext(ScheduleContext);
 
 	const handleLunch = (event) => {
 		setLunch(+event.target.value);
 	};
 
 	return (
-		<TableContainer>
-			<h1>Step 3. 주 시간표</h1>
+		<Stack spacing={{ xs: 2 }} flexDirection={'column'} alignItems={'center'}>
+			<Typography variant='h4' component={'h2'}>
+				Step 3. 주 시간표
+			</Typography>
 			<TextField label='점심시간' select SelectProps={{ native: true }} defaultValue={4} onChange={handleLunch}>
 				<option key={4} value={4}>
 					4교시 후
@@ -21,8 +26,10 @@ export default function SetWeek() {
 					5교시 후
 				</option>
 			</TextField>
-			<Button type='submit'>저장</Button>
 			<TimeTable edit={true} />
-		</TableContainer>
+			<ButtonGroup>
+				<Button onClick={() => setStep(1)}>Prev</Button>
+			</ButtonGroup>
+		</Stack>
 	);
 }

@@ -11,11 +11,11 @@ import { getFullDaysAndDays } from '../../lib/date';
 export default function SetTerm() {
 	const { term, setTerm, setStep } = useContext(ScheduleContext);
 	const handleTerm = (newTerm) => {
-		const [fullDays, days] = getFullDaysAndDays(newTerm.startDate, newTerm.endDate);
-		setTerm({ ...newTerm, fullDays, days });
+		const [fullDays, days, weeks] = getFullDaysAndDays(newTerm.startDate, newTerm.endDate);
+		setTerm({ ...newTerm, fullDays, days, weeks });
 	};
 
-	const { startDate, endDate, days, fullDays } = term;
+	const { startDate, endDate, days, fullDays, weeks } = term;
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -49,6 +49,9 @@ export default function SetTerm() {
 					</Typography>
 					<Typography variant='h6' component={'h3'}>
 						총 학기 일수: {fullDays}일
+					</Typography>
+					<Typography variant='h6' component={'h3'}>
+						학기 주차수: {weeks}주
 					</Typography>
 					<ButtonGroup>
 						<Button onClick={() => setStep(1)}>Next</Button>
