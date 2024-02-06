@@ -1,13 +1,18 @@
-import { IconButton, Stack, TextField } from '@mui/material';
 import { useContext, useState } from 'react';
-import { ScheduleContext } from '../../contexts';
-import { DefaultLecture, DeleteLecture } from './Lecture';
-import { getContrastColor, getRandomColor } from '../../lib/random';
+
+import { Button, ButtonGroup, Paper, Stack, TextField, Typography } from '@mui/material';
 import { Add } from '@mui/icons-material';
 
+import { ScheduleContext } from '../../contexts';
+
+import { DefaultLecture, DeleteLecture } from './Lecture';
+
+import { getContrastColor, getRandomColor } from '../../lib/random';
+
 export default function SetLecture() {
+	const { lectures, setLectures, setStep } = useContext(ScheduleContext);
+
 	const [newLecture, setNewLecture] = useState('');
-	const { lectures, setLectures } = useContext(ScheduleContext);
 
 	const handleAddLecture = (e) => {
 		e.preventDefault();
@@ -22,41 +27,38 @@ export default function SetLecture() {
 	};
 
 	return (
-		<Stack spacing={{ xs: 0, sm: 1 }} direction='column' alignItems={'flex-start'}>
-			<h1>Step 2. 교과 설정하기</h1>
-			<form onSubmit={handleAddLecture}>
-				<Stack spacing={{ xs: 0, sm: 1 }} direction='row'>
+		<Paper variant='outlined' sx={{ margin: '1rem', padding: '1rem' }}>
+			<Stack spacing={{ xs: 0, sm: 1 }} direction='column' alignItems={'center'}>
+				<Typography variant='h4' component={'h2'}>
+					Step 2. 교과 설정하기
+				</Typography>
+				<Stack spacing={{ xs: 0, sm: 1 }} direction='row' component={'form'} onSubmit={handleAddLecture}>
 					<TextField
 						autoComplete='off'
 						value={newLecture}
-						inputProps={{ style: { textAlign: 'center' }, onChange: (e) => setNewLecture(e.target.value) }}
+						label='교과 또는 반'
+						placeholder='교과 또는 반 학년 등을 적어주세요.'
+						inputProps={{
+							style: { textAlign: 'center' },
+							onChange: (e) => setNewLecture(e.target.value),
+						}}
 					/>
-					<IconButton type='submit'>
-						<Add />
-					</IconButton>
+					<Button type='submit' variant='contained' endIcon={<Add />}>
+						추가
+					</Button>
 				</Stack>
-			</form>
-			<Stack spacing={{ xs: 0, sm: 1 }} direction='row'>
-				{lectures &&
-					lectures.map(({ lecture, color, backgroundColor }, idx) =>
-						idx !== 0 ? (
-							<DeleteLecture
-								key={'lecture-' + idx}
-								lecture={lecture}
-								idx={idx}
-								color={color}
-								backgroundColor={backgroundColor}
-							/>
-						) : (
-							<DefaultLecture
-								key={'lecture-' + idx}
-								lecture={lecture}
-								color={color}
-								backgroundColor={backgroundColor}
-							/>
-						)
-					)}
+				<Stack spacing={{ xs: 2, sm: 1 }} direction='row' flexWrap={'wrap'}>
+					{lectures &&
+						lectures.map(({ lecture, color, backgroundColor }, idx) => {
+							const obj = { lecture, color, backgroundColor, key: 'lecture-' + idx };
+							return idx === 0 ? <DefaultLecture {...obj} /> : <DeleteLecture {...obj} />;
+						})}
+				</Stack>
+				<ButtonGroup>
+					<Button onClick={() => setStep(0)}>Prev</Button>
+					<Button onClick={() => setStep(2)}>Next</Button>
+				</ButtonGroup>
 			</Stack>
-		</Stack>
+		</Paper>
 	);
 }
