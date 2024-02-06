@@ -1,8 +1,11 @@
 import { useContext } from 'react';
+
+import { Button, ButtonGroup, Paper, Stack, Typography } from '@mui/material';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 import { ScheduleContext } from '../../contexts';
-import { Button, ButtonGroup, Paper, Stack, Typography } from '@mui/material';
+
 import { getFullDaysAndDays } from '../../lib/date';
 
 export default function SetTerm() {
