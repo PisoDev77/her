@@ -1,30 +1,57 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { ScheduleContext } from '../../contexts';
+import { Button, ButtonGroup, Paper, Stack, Typography } from '@mui/material';
+import { getFullDaysAndDays } from '../../lib/date';
 
 export default function SetTerm() {
-	const [startDate, setStartDate] = useState(null);
-	const [endDate, setEndDate] = useState();
+	const { term, setTerm, setStep } = useContext(ScheduleContext);
+	const handleTerm = (newTerm) => {
+		const [fullDays, days] = getFullDaysAndDays(newTerm.startDate, newTerm.endDate);
+		setTerm({ ...newTerm, fullDays, days });
+	};
+
+	const { startDate, endDate, days, fullDays } = term;
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
-			<h1>Step 1. 학기 기간 설정하기</h1>
-			<DatePicker
-				label={'시작일'}
-				openTo='month'
-				format='YYYY년 MM월 DD일'
-				views={['year', 'month', 'day']}
-				onChange={(date) => setStartDate(date)}
-			/>
-			<DatePicker
-				label={'끝 일'}
-				openTo='month'
-				format='YYYY년 MM월 DD일'
-				views={['year', 'month', 'day']}
-				onChange={(date) => setEndDate(date)}
-			/>
-			<h1>{startDate && startDate.format('YYYY-MM-DD')}</h1>
-			<h1>{endDate && endDate.format('YYYY-MM-DD')}</h1>
+			<Paper variant='outlined' sx={{ margin: '1rem', padding: '1rem' }}>
+				<Stack spacing={{ xs: 2 }} flexDirection='column' alignItems={'center'}>
+					<Typography variant='h4' component={'h2'}>
+						Step 1. 학기 기간 설정하기
+					</Typography>
+					<Typography variant='h5' component={'h3'}>
+						{startDate && '학기 시작일: ' + term.startDate.format('YYYY-MM-DD')}
+					</Typography>
+					<DatePicker
+						label={'학기 시작일'}
+						openTo='month'
+						format='YYYY년 MM월 DD일'
+						views={['year', 'month', 'day']}
+						onChange={(newDate) => handleTerm({ ...term, startDate: newDate })}
+					/>
+					<Typography variant='h5' component={'h3'}>
+						{endDate && '학기 마지막일: ' + term.endDate.format('YYYY-MM-DD')}
+					</Typography>
+					<DatePicker
+						label={'학기 마지막일'}
+						openTo='month'
+						format='YYYY년 MM월 DD일'
+						views={['year', 'month', 'day']}
+						onChange={(newDate) => handleTerm({ ...term, endDate: newDate })}
+					/>
+					<Typography variant='h6' component={'h3'}>
+						학기 일수(월-금만): {days}일
+					</Typography>
+					<Typography variant='h6' component={'h3'}>
+						총 학기 일수: {fullDays}일
+					</Typography>
+					<ButtonGroup>
+						<Button onClick={() => setStep(1)}>Next</Button>
+					</ButtonGroup>
+				</Stack>
+			</Paper>
 		</LocalizationProvider>
 	);
 }
